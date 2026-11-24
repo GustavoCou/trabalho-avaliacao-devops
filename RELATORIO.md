@@ -54,7 +54,6 @@ O daemon Docker encontra-se operacional, tendo respondido com sucesso ao comando
 Tag da imagem; docker ps; HTTP /health; utilizador efetivo do container:
 
 
-## E02 — Dockerfile e execução de um container
 
 **Construção da imagem:**
 
