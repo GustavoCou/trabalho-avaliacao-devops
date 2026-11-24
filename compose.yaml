@@ -12,11 +12,18 @@ services:
     volumes:
       - app-data:/data
     # TODO: adicionar healthcheck HTTP a /health usando python/urllib (sem instalar curl)
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; import sys; sys.exit(0) if urllib.request.urlopen('http://localhost:8000/health').status == 200 else sys.exit(1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   checker:
     image: curlimages/curl:8.11.1
     profiles: ["diagnostico"]
     # TODO: adicionar depends_on para aguardar api com condition: service_healthy
-
+    depends_on:
+      api:
+        condition: service_healthy
 volumes:
   app-data:
